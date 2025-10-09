@@ -8,7 +8,8 @@ import UserEdit from "./pages/UserEdit";
 import News from "./pages/News";
 import NewsDetails from "./pages/NewsDetails";
 import NewsEdit from "./pages/NewsEdit";
-import Scraper from "./pages/Scraper"; // <-- added
+import Scraper from "./pages/Scraper";
+import Logs from "./pages/Logs"; // <-- added
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 
@@ -104,6 +105,16 @@ function App() {
         element={
           <ProtectedRoute>
             <Scraper />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Logs */}
+      <Route
+        path="/logs"
+        element={
+          <ProtectedRoute>
+            <Logs />
           </ProtectedRoute>
         }
       />
