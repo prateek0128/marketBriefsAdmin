@@ -82,9 +82,16 @@ export default function Scraper() {
         const normalized: ConfigResponse = {
           enabled_sources: payload.enabled_sources ?? [],
           disabled_sources: payload.disabled_sources ?? [],
-          max_articles_per_source: typeof payload.max_articles_per_source === "number" ? payload.max_articles_per_source : 0,
-          database_sources: Array.isArray(payload.database_sources) ? payload.database_sources : [],
-          available_scrapers: Array.isArray(payload.available_scrapers) ? payload.available_scrapers : [],
+          max_articles_per_source:
+            typeof payload.max_articles_per_source === "number"
+              ? payload.max_articles_per_source
+              : 0,
+          database_sources: Array.isArray(payload.database_sources)
+            ? payload.database_sources
+            : [],
+          available_scrapers: Array.isArray(payload.available_scrapers)
+            ? payload.available_scrapers
+            : [],
         };
         setConfig(normalized);
         // initialize limit UI from config
@@ -190,7 +197,10 @@ export default function Scraper() {
       // backend expects PUT to /admin/config/scraping-limits with JSON body
       const res = await API.put("/admin/config/scraping-limits", { max_articles_per_source: n });
       const payload = res.data?.data ?? res.data;
-      const newLimit = typeof payload?.max_articles_per_source === "number" ? payload.max_articles_per_source : n;
+      const newLimit =
+        typeof payload?.max_articles_per_source === "number"
+          ? payload.max_articles_per_source
+          : n;
       // update config state from server response
       setConfig((c) => (c ? { ...c, max_articles_per_source: newLimit } : c));
       setLimitValue(newLimit);
@@ -200,17 +210,6 @@ export default function Scraper() {
       setSnack("Failed to update scraping limit");
     } finally {
       setSavingLimit(false);
-    }
-  }
-
-  function formatWhen(ts?: string | null) {
-    if (!ts) return "Never";
-    try {
-      const d = new Date(ts);
-      if (isNaN(d.getTime())) return ts;
-      return d.toLocaleString();
-    } catch {
-      return ts;
     }
   }
 
@@ -346,9 +345,6 @@ export default function Scraper() {
                       secondary={
                         <Box sx={{ mt: 1 }}>
                           <Typography sx={{ color: T.textDim, fontSize: 13 }}>{src.url}</Typography>
-                          <Typography sx={{ color: T.textDim, fontSize: 12, mt: 0.5 }}>
-                            Last scraped: <strong style={{ color: T.text }}>{formatWhen(src.last_scraped)}</strong>
-                          </Typography>
                         </Box>
                       }
                     />
