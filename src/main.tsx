@@ -1,8 +1,13 @@
 // src/main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import { ThemeProvider, createTheme, CssBaseline, GlobalStyles } from "@mui/material";
+import App from "./App";
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  GlobalStyles,
+} from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 
 const darkTheme = createTheme({
@@ -10,7 +15,7 @@ const darkTheme = createTheme({
     mode: "dark",
     background: {
       default: "#0f1724", // page background (outside cards)
-      paper: "#0f0f0f",   // card background (Papers)
+      paper: "#0f0f0f", // card background (Papers)
     },
     primary: { main: "#3b82f6" },
     secondary: { main: "#f59e0b" },
@@ -72,4 +77,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </BrowserRouter>
   </ThemeProvider>
 );
-
